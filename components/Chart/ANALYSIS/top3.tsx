@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 
 export interface CryptoCoin {
@@ -27,6 +28,7 @@ export interface CryptoCoin {
     atl_date: string;
     roi: null | { times: number; currency: string; percentage: number };
     last_updated: string;
+    modifiedSymbol? : string;
 }
 
 export default function Top3({ data }: { data: CryptoCoin[] }) {
@@ -43,14 +45,21 @@ export default function Top3({ data }: { data: CryptoCoin[] }) {
                 {coins.map((coin: CryptoCoin) => {
                     const isPositive = coin.price_change_percentage_24h > 0;
                     return (
-                        <div key={coin.id} className="flex items-center justify-between group">
-                            <div className="flex items-center gap-2">
+                        <div key={coin.id} className="flex justify-between justify-items-center">
+                            <div className="flex gap-1">
                                 <Image src={coin.image} alt={coin.name} width={20} height={20} className="w-5 h-5 rounded-full opacity-90" />
                                 <span className="text-xs text-[#ccc] group-hover:text-[#fff] transition-colors">{coin.name}</span>
                             </div>
+                            
+                            <span className="text-xs font-mono text-right">${coin.current_price.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}</span>
+                            
                             <span className={`text-xs font-mono ${isPositive ? "text-emerald-500" : "text-red-500"}`}>
                                 {isPositive ? "+" : ""}{coin.price_change_percentage_24h.toFixed(2)}%
                             </span>
+                            
                         </div>
                     );
                 })}

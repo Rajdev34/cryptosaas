@@ -1,4 +1,6 @@
+"use client"
 import Image from "next/image";
+
 
 export interface CryptoCoin {
     id: string;
@@ -30,6 +32,9 @@ export interface CryptoCoin {
 }
 
 export default function TwoFourgainers({ data }: { data: CryptoCoin[] }) {
+    
+
+    //Top 5 coins
     const coins = data
         .sort((a: CryptoCoin, b: CryptoCoin) => b.price_change_percentage_24h - a.price_change_percentage_24h)
         .slice(0, 5);
