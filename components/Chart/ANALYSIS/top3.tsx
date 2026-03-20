@@ -51,11 +51,6 @@ export default function Top3({ data }: { data: CryptoCoin[] }) {
                                 <span className="text-xs text-[#ccc] group-hover:text-[#fff] transition-colors">{coin.name}</span>
                             </div>
                             
-                            <span className="text-xs font-mono text-right">${coin.current_price.toLocaleString(undefined, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })}</span>
-                            
                             <span className={`text-xs font-mono ${isPositive ? "text-emerald-500" : "text-red-500"}`}>
                                 {isPositive ? "+" : ""}{coin.price_change_percentage_24h.toFixed(2)}%
                             </span>
